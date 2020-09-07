@@ -12,4 +12,6 @@ public interface MessageRepository {
 
 	Optional<Message> find(String id);
 
+	boolean exists(String id);
+
 }
