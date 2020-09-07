@@ -22,7 +22,6 @@ class DeleteRequestNotificationTest {
 	@Mock
 	private MessageRepository repository;
 
-
 	@Test
 	public void whenFindMessageThenReturn() throws NotificationException {
 		var id = UUID.randomUUID().toString();
