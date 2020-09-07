@@ -10,6 +10,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<lombok.version>1.18.12</lombok.version>
 		<jacoco.line.coverage>1.0</jacoco.line.coverage>
 		<jacoco.branch.coverage>1.0</jacoco.branch.coverage>
 	</properties>
@@ -19,7 +20,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.12</version>
+				<version>${lombok.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -70,6 +71,13 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 			<plugin>
