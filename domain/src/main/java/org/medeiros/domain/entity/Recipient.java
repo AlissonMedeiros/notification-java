@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class Recipient {
 
-	private String id;
 	private String name;
 	private String email;
 	private String phoneNumber;
