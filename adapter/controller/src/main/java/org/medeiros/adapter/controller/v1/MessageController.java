@@ -1,24 +1,44 @@
 package org.medeiros.adapter.controller.v1;
 
+import org.medeiros.adapter.controller.v1.dto.MessageDto;
+import org.medeiros.usecase.DeleteRequestNotification;
+import org.medeiros.usecase.FindRequestNotification;
+import org.medeiros.usecase.PushRequestNotification;
+import org.medeiros.usecase.exception.NotificationException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/message/")
 public class MessageController {
 
+	private final FindRequestNotification findRequestNotification;
+	private final PushRequestNotification pushRequestNotification;
+	private final DeleteRequestNotification deleteRequestNotification;
+
+	public MessageController(FindRequestNotification findRequestNotification,
+							 PushRequestNotification pushRequestNotification,
+							 DeleteRequestNotification deleteRequestNotification) {
+		this.findRequestNotification = findRequestNotification;
+		this.pushRequestNotification = pushRequestNotification;
+		this.deleteRequestNotification = deleteRequestNotification;
+	}
+
 	@PostMapping
-	public void create() {
-
+	public MessageDto create(@RequestBody MessageDto messageDto) throws NotificationException {
+		var entity = MessageMapper.toEntity(messageDto);
+		var message = pushRequestNotification.push(entity);
+		return MessageMapper.toDto(message);
 	}
 
-	@GetMapping
-	public String find() {
-		return "OK";
+	@GetMapping("/{id}")
+	public MessageDto find(@PathVariable("id") String id) throws NotificationException {
+		var message = findRequestNotification.find(id);
+		return MessageMapper.toDto(message);
 	}
 
-	@DeleteMapping
-	public void delete() {
-
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable("id") String id) throws NotificationException {
+		deleteRequestNotification.delete(id);
 	}
 
 }

@@ -2,9 +2,9 @@ package org.medeiros.usecase;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.medeiros.domain.entity.CommunicationChannel;
-import org.medeiros.domain.entity.Message;
-import org.medeiros.domain.entity.Recipient;
+import org.medeiros.domain.CommunicationChannel;
+import org.medeiros.domain.Message;
+import org.medeiros.domain.Recipient;
 import org.medeiros.usecase.exception.NotificationException;
 import org.medeiros.usecase.port.MessageRepository;
 import org.mockito.InjectMocks;

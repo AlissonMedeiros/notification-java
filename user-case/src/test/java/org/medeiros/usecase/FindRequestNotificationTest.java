@@ -2,7 +2,7 @@ package org.medeiros.usecase;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.medeiros.domain.entity.Message;
+import org.medeiros.domain.Message;
 import org.medeiros.usecase.exception.NotificationException;
 import org.medeiros.usecase.port.MessageRepository;
 import org.mockito.InjectMocks;

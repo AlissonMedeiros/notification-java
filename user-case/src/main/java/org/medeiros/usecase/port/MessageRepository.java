@@ -1,6 +1,6 @@
 package org.medeiros.usecase.port;
 
-import org.medeiros.domain.entity.Message;
+import org.medeiros.domain.Message;
 
 import java.util.Optional;
 

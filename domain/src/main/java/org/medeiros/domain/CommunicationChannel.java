@@ -1,4 +1,4 @@
-package org.medeiros.domain.entity;
+package org.medeiros.domain;
 
 public enum CommunicationChannel {
 	EMAIL,

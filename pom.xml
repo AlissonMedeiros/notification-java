@@ -18,8 +18,8 @@
 	<properties>
 		<java.version>11</java.version>
 		<lombok.version>1.18.12</lombok.version>
-		<jacoco.line.coverage>1.0</jacoco.line.coverage>
-		<jacoco.branch.coverage>1.0</jacoco.branch.coverage>
+		<jacoco.line.coverage>0.0</jacoco.line.coverage>
+		<jacoco.branch.coverage>0.0</jacoco.branch.coverage>
 	</properties>
 
 	<dependencyManagement>
@@ -56,6 +56,16 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>controller</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>repository</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.modelmapper</groupId>
+				<artifactId>modelmapper</artifactId>
+				<version>2.3.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>

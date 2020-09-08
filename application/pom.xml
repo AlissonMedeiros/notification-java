@@ -29,10 +29,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
@@ -45,6 +41,18 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>controller</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.medeiros</groupId>
+			<artifactId>domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.medeiros</groupId>
+			<artifactId>user-case</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.medeiros</groupId>
+			<artifactId>repository</artifactId>
 		</dependency>
 	</dependencies>
 

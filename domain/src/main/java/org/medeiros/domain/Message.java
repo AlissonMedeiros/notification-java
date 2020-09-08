@@ -1,13 +1,17 @@
-package org.medeiros.domain.entity;
+package org.medeiros.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
 
 	private String id;

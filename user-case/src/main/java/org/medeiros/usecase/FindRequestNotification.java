@@ -1,6 +1,6 @@
 package org.medeiros.usecase;
 
-import org.medeiros.domain.entity.Message;
+import org.medeiros.domain.Message;
 import org.medeiros.usecase.exception.MessageNotFoundException;
 import org.medeiros.usecase.exception.NotificationException;
 import org.medeiros.usecase.port.MessageRepository;

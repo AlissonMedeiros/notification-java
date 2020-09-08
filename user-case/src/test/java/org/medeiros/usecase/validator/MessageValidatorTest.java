@@ -1,9 +1,9 @@
 package org.medeiros.usecase.validator;
 
 import org.junit.jupiter.api.Test;
-import org.medeiros.domain.entity.CommunicationChannel;
-import org.medeiros.domain.entity.Message;
-import org.medeiros.domain.entity.Recipient;
+import org.medeiros.domain.CommunicationChannel;
+import org.medeiros.domain.Message;
+import org.medeiros.domain.Recipient;
 
 import java.time.LocalDateTime;
 
