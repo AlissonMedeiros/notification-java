@@ -21,7 +21,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = NotificationApplication.class,
 	webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles(resolver = ActiveProfileResolver.class)
 public class ApplicationTest {
 
 	@LocalServerPort

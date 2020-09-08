@@ -11,14 +11,35 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+  services:
+    # Label used to access the service container
+    postgres:
+      # Docker Hub image
+      image: postgres
+      # Provide the password for postgres
+      env:
+        POSTGRES_PASSWORD: test123
+        POSTGRES_DB: notification
+        POSTGRES_USER: user
+      options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+      ports:
+        # Maps tcp port 5432 on service container to the host
+        - 5432:5432
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/notification
+          #For use CI profile
+          REMOVE_ENV: true
