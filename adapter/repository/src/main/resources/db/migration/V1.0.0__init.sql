@@ -11,7 +11,7 @@ CREATE TABLE message_entity (
 
 CREATE TABLE chat_entity (
    chat_id VARCHAR(36) PRIMARY KEY NOT NULL,
-   chat_status VARCHAR(64) PRIMARY KEY NOT NULL,
+   chat_status VARCHAR(64) NOT NULL,
    chat_date TIMESTAMP NOT NULL,
    message_id VARCHAR(36) NOT NULL,
    FOREIGN KEY (message_id)

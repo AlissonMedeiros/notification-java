@@ -5,6 +5,8 @@ import org.medeiros.usecase.DeleteRequestNotification;
 import org.medeiros.usecase.FindRequestNotification;
 import org.medeiros.usecase.PushRequestNotification;
 import org.medeiros.usecase.exception.NotificationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,16 +26,17 @@ public class MessageController {
 	}
 
 	@PostMapping
-	public MessageDto create(@RequestBody MessageDto messageDto) throws NotificationException {
+	public ResponseEntity<MessageDto> create(@RequestBody MessageDto messageDto) throws NotificationException {
 		var entity = MessageMapper.toEntity(messageDto);
 		var message = pushRequestNotification.push(entity);
-		return MessageMapper.toDto(message);
+		return ResponseEntity.status(HttpStatus.CREATED)
+			.body(MessageMapper.toDto(message));
 	}
 
 	@GetMapping("/{id}")
-	public MessageDto find(@PathVariable("id") String id) throws NotificationException {
+	public ResponseEntity<MessageDto> find(@PathVariable("id") String id) throws NotificationException {
 		var message = findRequestNotification.find(id);
-		return MessageMapper.toDto(message);
+		return ResponseEntity.ok(MessageMapper.toDto(message));
 	}
 
 	@DeleteMapping("/{id}")
