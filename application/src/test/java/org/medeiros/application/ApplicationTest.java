@@ -10,6 +10,7 @@ import org.medeiros.adapter.controller.v1.dto.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = NotificationApplication.class,
 	webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@TestPropertySource(locations="classpath:test-application.properties")
 public class ApplicationTest {
 
 	@LocalServerPort
