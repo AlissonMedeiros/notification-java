@@ -1,7 +1,7 @@
 package org.medeiros.adapter.controller.v1;
 
 import org.junit.jupiter.api.Test;
-import org.medeiros.adapter.controller.v1.dto.MessageDto;
+import org.medeiros.adapter.controller.v1.dto.MessageResponseDto;
 import org.medeiros.domain.Message;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +19,7 @@ class MessageMapperTest {
 
 	@Test
 	public void whenHasDroThenConvertToEntity() {
-		var message = MessageDto.builder()
+		var message = MessageResponseDto.builder()
 			.body("")
 			.build();
 		var entity = MessageMapper.toEntity(message);

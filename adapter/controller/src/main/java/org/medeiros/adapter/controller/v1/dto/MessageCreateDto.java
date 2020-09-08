@@ -11,9 +11,12 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatDto {
+public class MessageCreateDto {
 
-	private StatusDto status;
-	private LocalDateTime date;
+	private LocalDateTime scheduleDate;
+	private String body;
+	private RecipientDto recipient;
+	private CommunicationChannelDto channel;
 
 }
+

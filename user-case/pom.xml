@@ -60,7 +60,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mutationThreshold>91</mutationThreshold>
+					<mutationThreshold>83</mutationThreshold>
 					<targetClasses>
 						<param>org.medeiros*</param>
 					</targetClasses>

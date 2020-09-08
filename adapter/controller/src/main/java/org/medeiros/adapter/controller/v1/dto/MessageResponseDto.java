@@ -12,14 +12,14 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageDto {
+public class MessageResponseDto {
 
 	private String id;
 	private LocalDateTime scheduleDate;
 	private String body;
 	private RecipientDto recipient;
 	private CommunicationChannelDto channel;
-	private Collection<ChatDto> chats;
+	private Collection<ChatResponseDto> chats;
 
 }
 

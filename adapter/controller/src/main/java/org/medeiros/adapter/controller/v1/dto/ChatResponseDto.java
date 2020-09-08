@@ -1,4 +1,4 @@
-package org.medeiros.domain;
+package org.medeiros.adapter.controller.v1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,9 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chat {
+public class ChatResponseDto {
 
-	private String id;
-	private Status status;
+	private StatusResponseDto status;
 	private LocalDateTime date;
 
 }

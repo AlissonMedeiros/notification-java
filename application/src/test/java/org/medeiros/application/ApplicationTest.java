@@ -5,24 +5,23 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.medeiros.NotificationApplication;
-import org.medeiros.adapter.controller.v1.dto.*;
+import org.medeiros.adapter.controller.v1.dto.CommunicationChannelDto;
+import org.medeiros.adapter.controller.v1.dto.MessageCreateDto;
+import org.medeiros.adapter.controller.v1.dto.RecipientDto;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = NotificationApplication.class,
-	webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(locations="classpath:test-application.properties")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "classpath:test-application.properties")
 public class ApplicationTest {
 
 	@LocalServerPort
@@ -37,9 +36,9 @@ public class ApplicationTest {
 	@Test
 	public void whenCreateNewScheduleThenReturn() {
 		var now = LocalDateTime.now();
-		RestAssured.given()
+		String id = given()
 			.contentType(ContentType.JSON)
-			.body(MessageDto.builder()
+			.body(MessageCreateDto.builder()
 				.channel(CommunicationChannelDto.WHATSAPP)
 				.scheduleDate(now)
 				.body("Hello")
@@ -49,17 +48,33 @@ public class ApplicationTest {
 					.phoneId("123")
 					.phoneNumber("89898989")
 					.build())
-				.chats(List.of(ChatDto.builder()
-					.date(now)
-					.status(StatusDto.WAITING)
-					.build()))
 				.build())
 			.when()
 			.post("/v1/message/")
 			.then()
 			.statusCode(201)
 			.body("id", notNullValue())
-			.body("scheduleDate", equalTo(now.toString()));
+			.body("scheduleDate", equalTo(now.toString()))
+			.body("scheduleDate", equalTo(now.toString()))
+			.body("body", equalTo("Hello"))
+			.body("recipient.name", equalTo("John James"))
+			.body("chats[0].status", equalTo("WAITING"))
+			.extract()
+			.path("id");
+
+		given()
+			.when()
+			.get("/v1/message/{id}", id)
+			.then()
+			.statusCode(200)
+			.body("scheduleDate", equalTo(now.toString()))
+			.body("scheduleDate", equalTo(now.toString()))
+			.body("body", equalTo("Hello"))
+			.body("recipient.name", equalTo("John James"))
+			.body("recipient.phoneId", equalTo("123"))
+			.body("recipient.email", equalTo("johm@jame.com"))
+			.body("recipient.phoneNumber", equalTo("89898989"))
+			.body("chats[0].status", equalTo("WAITING"));
 	}
 
 }

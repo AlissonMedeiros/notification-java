@@ -6,7 +6,6 @@ import org.medeiros.usecase.port.MessageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class MessageGateway implements MessageRepository {
@@ -17,12 +16,10 @@ public class MessageGateway implements MessageRepository {
 		this.repository = repository;
 	}
 
-
 	@Override
 	public Message create(Message message) {
 		var entity = MessageMapper.toEntity(message);
 		entity.getChats().forEach(c -> {
-			c.setId(UUID.randomUUID().toString());
 			c.setMessage(entity);
 		});
 		repository.save(entity);

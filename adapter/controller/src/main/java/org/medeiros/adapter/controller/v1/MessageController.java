@@ -1,6 +1,7 @@
 package org.medeiros.adapter.controller.v1;
 
-import org.medeiros.adapter.controller.v1.dto.MessageDto;
+import org.medeiros.adapter.controller.v1.dto.MessageCreateDto;
+import org.medeiros.adapter.controller.v1.dto.MessageResponseDto;
 import org.medeiros.usecase.DeleteRequestNotification;
 import org.medeiros.usecase.FindRequestNotification;
 import org.medeiros.usecase.PushRequestNotification;
@@ -26,7 +27,7 @@ public class MessageController {
 	}
 
 	@PostMapping
-	public ResponseEntity<MessageDto> create(@RequestBody MessageDto messageDto) throws NotificationException {
+	public ResponseEntity<MessageResponseDto> create(@RequestBody MessageCreateDto messageDto) throws NotificationException {
 		var entity = MessageMapper.toEntity(messageDto);
 		var message = pushRequestNotification.push(entity);
 		return ResponseEntity.status(HttpStatus.CREATED)
@@ -34,14 +35,15 @@ public class MessageController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<MessageDto> find(@PathVariable("id") String id) throws NotificationException {
+	public ResponseEntity<MessageResponseDto> find(@PathVariable("id") String id) throws NotificationException {
 		var message = findRequestNotification.find(id);
 		return ResponseEntity.ok(MessageMapper.toDto(message));
 	}
 
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") String id) throws NotificationException {
+	public ResponseEntity delete(@PathVariable("id") String id) throws NotificationException {
 		deleteRequestNotification.delete(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
 }
