@@ -11,19 +11,21 @@ import java.util.Optional;
 public class MessageGateway implements MessageRepository {
 
 	private final MessageEntityRepository repository;
+	private final MessageMapper messageMapper;
 
-	public MessageGateway(MessageEntityRepository repository) {
+	public MessageGateway(MessageEntityRepository repository, MessageMapper messageMapper) {
 		this.repository = repository;
+		this.messageMapper = messageMapper;
 	}
 
 	@Override
 	public Message create(Message message) {
-		var entity = MessageMapper.toEntity(message);
+		var entity = messageMapper.toEntity(message);
 		entity.getChats().forEach(c -> {
 			c.setMessage(entity);
 		});
 		repository.save(entity);
-		return MessageMapper.toDomain(entity);
+		return messageMapper.toDomain(entity);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class MessageGateway implements MessageRepository {
 	public Optional<Message> find(String id) {
 		var message = repository.findById(id);
 		if (message.isPresent()) {
-			return Optional.of(MessageMapper.toDomain(message.get()));
+			return Optional.of(messageMapper.toDomain(message.get()));
 		}
 		return Optional.empty();
 	}

@@ -14,13 +14,16 @@ import java.util.UUID;
 public class PushRequestNotification {
 
 	private final MessageRepository repository;
+	private final MessageValidator messageValidator;
 
-	public PushRequestNotification(MessageRepository repository) {
+	public PushRequestNotification(MessageRepository repository,
+								   MessageValidator messageValidator) {
 		this.repository = repository;
+		this.messageValidator = messageValidator;
 	}
 
 	public Message push(Message message) throws NotificationException {
-		MessageValidator.validate(message);
+		messageValidator.validate(message);
 		message.setId(UUID.randomUUID().toString());
 		message.setChats(List.of(Chat.builder()
 			.id(UUID.randomUUID().toString())

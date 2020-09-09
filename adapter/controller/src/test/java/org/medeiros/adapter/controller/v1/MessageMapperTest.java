@@ -1,6 +1,7 @@
 package org.medeiros.adapter.controller.v1;
 
 import org.junit.jupiter.api.Test;
+import org.medeiros.adapter.controller.v1.dto.MessageCreateDto;
 import org.medeiros.adapter.controller.v1.dto.MessageResponseDto;
 import org.medeiros.domain.Message;
 
@@ -18,8 +19,16 @@ class MessageMapperTest {
 	}
 
 	@Test
-	public void whenHasDroThenConvertToEntity() {
+	public void whenHasResponseDtoThenConvertToEntity() {
 		var message = MessageResponseDto.builder()
+			.body("")
+			.build();
+		var entity = MessageMapper.toEntity(message);
+		assertThat(entity).isNotNull();
+	}
+
+	public void whenHasCreateDtoThenConvertToEntity() {
+		var message = MessageCreateDto.builder()
 			.body("")
 			.build();
 		var entity = MessageMapper.toEntity(message);

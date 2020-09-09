@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.medeiros.domain.CommunicationChannel;
 import org.medeiros.domain.Message;
 import org.medeiros.domain.Recipient;
+import org.medeiros.usecase.exception.NotificationException;
 
 import java.time.LocalDateTime;
 
@@ -11,9 +12,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MessageValidatorTest {
 
+	private MessageValidator messageValidator = new MessageValidator();
+
 	@Test
 	public void whenHasNullBodyThenReturnError() {
-		assertThatThrownBy(() -> MessageValidator.validate(Message.builder()
+		assertThatThrownBy(() -> messageValidator.validate(Message.builder()
 			.channel(CommunicationChannel.WHATSAPP)
 			.scheduleDate(LocalDateTime.now())
 			.recipient(Recipient.builder().name("João Silva").build())
@@ -23,7 +26,7 @@ class MessageValidatorTest {
 
 	@Test
 	public void whenHasEmptyBodyThenReturnError() {
-		assertThatThrownBy(() -> MessageValidator.validate(Message.builder()
+		assertThatThrownBy(() -> messageValidator.validate(Message.builder()
 			.channel(CommunicationChannel.WHATSAPP)
 			.scheduleDate(LocalDateTime.now())
 			.recipient(Recipient.builder().name("João Silva").build())
@@ -34,7 +37,7 @@ class MessageValidatorTest {
 
 	@Test
 	public void whenHasEmptyRecipientThenReturnError() {
-		assertThatThrownBy(() -> MessageValidator.validate(Message.builder()
+		assertThatThrownBy(() -> messageValidator.validate(Message.builder()
 			.channel(CommunicationChannel.WHATSAPP)
 			.scheduleDate(LocalDateTime.now())
 			.recipient(null)
@@ -45,7 +48,7 @@ class MessageValidatorTest {
 
 	@Test
 	public void whenHasNullRecipientThenReturnError() {
-		assertThatThrownBy(() -> MessageValidator.validate(Message.builder()
+		assertThatThrownBy(() -> messageValidator.validate(Message.builder()
 			.channel(CommunicationChannel.WHATSAPP)
 			.scheduleDate(LocalDateTime.now())
 			.recipient(Recipient.builder().name(null).build())
@@ -53,4 +56,15 @@ class MessageValidatorTest {
 			.build()))
 			.hasMessage("Mensagem precisa de um destinatário, favor informar nome, telefone e e-mail!");
 	}
+
+	@Test
+	public void whenHasValidRecipientThenDoNothing() throws NotificationException {
+		messageValidator.validate(Message.builder()
+			.channel(CommunicationChannel.WHATSAPP)
+			.scheduleDate(LocalDateTime.now())
+			.recipient(Recipient.builder().name("Nome").build())
+			.body("Olá, tudo bem?")
+			.build());
+	}
+
 }
