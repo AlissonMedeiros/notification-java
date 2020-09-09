@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Docker build/push
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -21,5 +21,4 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: true
           tags: notification/app:latest
