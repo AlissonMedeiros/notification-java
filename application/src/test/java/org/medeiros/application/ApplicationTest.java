@@ -77,4 +77,14 @@ public class ApplicationTest {
 			.body("chats[0].status", equalTo("WAITING"));
 	}
 
+	@Test
+	public void whenHasInvalidIdThenReturnError() {
+		given()
+			.when()
+			.get("/v1/message/{id}", "123123")
+			.then()
+			.statusCode(404)
+			.body("message", equalTo("Mensagem com o id: 123123 não foi encontrada, confira se o identificador está correto e tente novamente."));
+	}
+
 }
