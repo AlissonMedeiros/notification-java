@@ -16,8 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -54,8 +53,7 @@ public class ApplicationTest {
 			.then()
 			.statusCode(201)
 			.body("id", notNullValue())
-			.body("scheduleDate", equalTo(now.toString()))
-			.body("scheduleDate", equalTo(now.toString()))
+			.body("scheduleDate", containsString(now.toString()))
 			.body("body", equalTo("Hello"))
 			.body("recipient.name", equalTo("John James"))
 			.body("chats[0].status", equalTo("WAITING"))
@@ -67,8 +65,7 @@ public class ApplicationTest {
 			.get("/v1/message/{id}", id)
 			.then()
 			.statusCode(200)
-			.body("scheduleDate", equalTo(now.toString()))
-			.body("scheduleDate", equalTo(now.toString()))
+			.body("scheduleDate", containsString(now.toString()))
 			.body("body", equalTo("Hello"))
 			.body("recipient.name", equalTo("John James"))
 			.body("recipient.phoneId", equalTo("123"))
