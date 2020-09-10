@@ -43,7 +43,7 @@ public class ApplicationTest {
 			.then()
 			.statusCode(201)
 			.body("id", notNullValue())
-			.body("scheduleDate", containsString(now.toString()))
+			.body("scheduleDate", containsString(now.toString().substring(0, 24)))
 			.body("body", equalTo("Hello"))
 			.body("channel", equalTo("WHATSAPP"))
 			.body("recipient.name", equalTo("John James"))
