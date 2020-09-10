@@ -56,7 +56,7 @@ public class ApplicationTest {
 			.get("/v1/message/{id}", id)
 			.then()
 			.statusCode(200)
-			.body("scheduleDate", containsString(now.toString()))
+			.body("scheduleDate", containsString(now.toString().substring(0, 24)))
 			.body("body", equalTo("Hello"))
 			.body("channel", equalTo("WHATSAPP"))
 			.body("recipient.name", equalTo("John James"))
@@ -139,7 +139,6 @@ public class ApplicationTest {
 			.body("recipient.name", equalTo("John James"))
 			.body("chats[0].status", equalTo("WAITING"));
 	}
-
 
 	@Test
 	public void whenCreateNewSmsScheduleThenReturn() {

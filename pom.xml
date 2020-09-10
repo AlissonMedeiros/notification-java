@@ -21,7 +21,7 @@
 		<testcontainers.version>1.14.3</testcontainers.version>
 		<groovy.version>3.0.2</groovy.version>
 		<io-rest-assured.version>4.3.1</io-rest-assured.version>
-		<jacoco.line.coverage>0.00</jacoco.line.coverage>
+		<jacoco.line.coverage>0.43</jacoco.line.coverage>
 		<jacoco.branch.coverage>0.00</jacoco.branch.coverage>
 	</properties>
 
@@ -150,6 +150,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.5</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*Repository.*</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

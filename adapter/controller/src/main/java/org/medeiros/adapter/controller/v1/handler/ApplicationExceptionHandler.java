@@ -13,7 +13,9 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
 	@ExceptionHandler(MessageNotFoundException.class)
 	public ResponseEntity<Object> handleMessageNotFoundException(
-		MessageNotFoundException ex, WebRequest request) {
+		MessageNotFoundException ex,
+		WebRequest request
+	) {
 		ErrorDto error = ErrorDto.builder()
 			.message(ex.getMessage())
 			.build();

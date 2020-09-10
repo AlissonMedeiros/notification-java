@@ -17,27 +17,30 @@ public class MessageController {
 	private final FindRequestNotification findRequestNotification;
 	private final PushRequestNotification pushRequestNotification;
 	private final DeleteRequestNotification deleteRequestNotification;
+	private final ControllerMessageMapper mapper;
 
 	public MessageController(FindRequestNotification findRequestNotification,
 							 PushRequestNotification pushRequestNotification,
-							 DeleteRequestNotification deleteRequestNotification) {
+							 DeleteRequestNotification deleteRequestNotification,
+							 ControllerMessageMapper mapper) {
 		this.findRequestNotification = findRequestNotification;
 		this.pushRequestNotification = pushRequestNotification;
 		this.deleteRequestNotification = deleteRequestNotification;
+		this.mapper = mapper;
 	}
 
 	@PostMapping
 	public ResponseEntity<MessageResponseDto> create(@RequestBody MessageCreateDto messageDto) throws NotificationException {
-		var entity = MessageMapper.toEntity(messageDto);
+		var entity = mapper.toEntity(messageDto);
 		var message = pushRequestNotification.push(entity);
 		return ResponseEntity.status(HttpStatus.CREATED)
-			.body(MessageMapper.toDto(message));
+			.body(mapper.toDto(message));
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<MessageResponseDto> find(@PathVariable("id") String id) throws NotificationException {
 		var message = findRequestNotification.find(id);
-		return ResponseEntity.ok(MessageMapper.toDto(message));
+		return ResponseEntity.ok(mapper.toDto(message));
 	}
 
 	@DeleteMapping("/{id}")
