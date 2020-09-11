@@ -155,6 +155,62 @@ public class ApplicationTest {
 			.body("chats[0].status", equalTo("WAITING"));
 	}
 
+	@Test
+	public void whenHasInvalidDateThenReturnError() {
+		var message = buildDefaultMessage(LocalDateTime.now());
+		message.setScheduleDate(null);
+		given()
+			.contentType(ContentType.JSON)
+			.body(message)
+			.when()
+			.post("/v1/message/")
+			.then()
+			.statusCode(400)
+			.body("[0]", equalTo("Schedule date can't be null."));
+	}
+
+	@Test
+	public void whenHasInvalidRecipientThenReturnError() {
+		var message = buildDefaultMessage(LocalDateTime.now());
+		message.setRecipient(null);
+		given()
+			.contentType(ContentType.JSON)
+			.body(message)
+			.when()
+			.post("/v1/message/")
+			.then()
+			.statusCode(400)
+			.body("[0]", equalTo("Message need a recipient!"));
+	}
+
+	@Test
+	public void whenHasInvalidChannelThenReturnError() {
+		var message = buildDefaultMessage(LocalDateTime.now());
+		message.setChannel(null);
+		given()
+			.contentType(ContentType.JSON)
+			.body(message)
+			.when()
+			.post("/v1/message/")
+			.then()
+			.statusCode(400)
+			.body("[0]", equalTo("Channel can't be null."));
+	}
+
+	@Test
+	public void whenHasInvalidBodyThenReturnError() {
+		var message = buildDefaultMessage(LocalDateTime.now());
+		message.setBody(null);
+		given()
+			.contentType(ContentType.JSON)
+			.body(message)
+			.when()
+			.post("/v1/message/")
+			.then()
+			.statusCode(400)
+			.body("[0]", equalTo("Body can't be null."));
+	}
+
 	private MessageCreateDto buildDefaultMessage(LocalDateTime now) {
 		return buildMessage(now, CommunicationChannelDto.WHATSAPP);
 	}

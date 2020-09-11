@@ -21,8 +21,8 @@
 		<testcontainers.version>1.14.3</testcontainers.version>
 		<groovy.version>3.0.2</groovy.version>
 		<io-rest-assured.version>4.3.1</io-rest-assured.version>
-		<jacoco.line.coverage>0.43</jacoco.line.coverage>
-		<jacoco.branch.coverage>0.00</jacoco.branch.coverage>
+		<jacoco.line.coverage>0.99</jacoco.line.coverage>
+		<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
 	</properties>
 
 	<dependencyManagement>
@@ -153,6 +153,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/*Repository.*</exclude>
+						<exclude>**/*NotificationApplication.*</exclude>
 					</excludes>
 				</configuration>
 				<executions>

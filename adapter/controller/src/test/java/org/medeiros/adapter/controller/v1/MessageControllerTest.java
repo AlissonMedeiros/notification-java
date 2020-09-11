@@ -15,6 +15,11 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,6 +38,8 @@ class MessageControllerTest {
 	private DeleteRequestNotification deleteRequestNotification;
 	@Spy
 	private ControllerMessageMapper mapper = new ControllerMessageMapper();
+	@Mock
+	private BindingResult bindingResult;
 
 	@Test
 	public void whenDeleteTheReturn204() throws NotificationException {
@@ -83,6 +90,15 @@ class MessageControllerTest {
 		verify(pushRequestNotification).push(message);
 		verify(mapper).toEntity(any());
 		verify(mapper).toDto(any());
+	}
+
+	@Test
+	public void whenCreateTheReturn21() throws NotificationException {
+		when(bindingResult.getAllErrors()).thenReturn(List.of(new FieldError("a", "b", "Error")));
+		MethodArgumentNotValidException exception = new MethodArgumentNotValidException(null, bindingResult);
+		var response = messageController.handleValidationExceptions(exception);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(response.getBody()).isEqualTo(List.of("Error"));
 	}
 
 }
