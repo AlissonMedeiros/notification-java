@@ -22,8 +22,14 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Deploy artifacts
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/AlissonMedeiros -Dtoken=GH_TOKEN
+    - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: medeiros/notification/app
+        tag_with_ref: true
     -
         name: Build and push
         id: docker_build
