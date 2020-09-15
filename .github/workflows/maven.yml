@@ -28,7 +28,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: alissonmedeiros/notification-java/app:$GITHUB_SHA
+        repository: alissonmedeiros/notification-java/app
         tag_with_ref: true
     -
         name: Build and push
