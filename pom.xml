@@ -118,7 +118,7 @@
 
 	<modules>
 		<module>domain</module>
-		<module>user-case</module>
+		<module>use-case</module>
 		<module>application</module>
 		<module>adapter/controller</module>
 		<module>adapter/repository</module>
