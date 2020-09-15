@@ -44,7 +44,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.medeiros</groupId>
-			<artifactId>user-case</artifactId>
+			<artifactId>use-case</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.medeiros</groupId>
