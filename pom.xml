@@ -119,9 +119,9 @@
 	<modules>
 		<module>domain</module>
 		<module>use-case</module>
-		<module>application</module>
-		<module>adapter/controller</module>
-		<module>adapter/repository</module>
+		<module>spring-application</module>
+		<module>adapter/spring-data-repository</module>
+		<module>adapter/spring-web-controller</module>
 	</modules>
 
 	<build>
