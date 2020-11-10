@@ -1,5 +1,5 @@
 # Use postgres/example user/password credentials
-version: '3.1'
+version: '3.8'
 
 services:
 
@@ -11,4 +11,12 @@ services:
       - POSTGRES_URL=jdbc:postgresql://db:5432/notification
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=test123
+    deploy:
+          resources:
+            limits:
+              cpus: '0.15'
+              memory: 1024M
+            reservations:
+              cpus: '0.05'
+              memory: 256M
 

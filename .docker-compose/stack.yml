@@ -1,5 +1,5 @@
 # Use postgres/example user/password credentials
-version: '3.1'
+version: '3.8'
 
 services:
 
@@ -8,7 +8,7 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: test123
-      POSTGRES_DB: notification
+        POSTGRES_DB: notification
       POSTGRES_USER: user
     ports:
       - 5432:5432
