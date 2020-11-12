@@ -41,49 +41,49 @@ class MessageGatewayTest {
 		ArgumentCaptor<MessageEntity> captor = ArgumentCaptor.forClass(MessageEntity.class);
 		verify(repository).save(captor.capture());
 		var messageEntity = captor.getValue();
-		assertThat(messageEntity.getChats().iterator().next().getMessage().getId()).isEqualTo(id);
+		assertThat(messageEntity.getChats().iterator().next().getMessage().getId()).isEqualTo(123L);
 
 	}
 
 	@Test
 	public void whenDeleteThenCallRepository() {
-		String id = "123";
-		messageGateway.delete(id);
+		var id = 123L;
+		messageGateway.delete(String.valueOf(id));
 		verify(repository).deleteById(id);
 	}
 
 	@Test
 	public void whenExistThenCallRepository() {
-		String id = "123";
+		var id = 123L;
 		when(repository.existsById(id)).thenReturn(true);
-		var result = messageGateway.exists(id);
+		var result = messageGateway.exists(String.valueOf(id));
 		assertThat(result).isTrue();
 		verify(repository).existsById(id);
 	}
 
 	@Test
 	public void whenNotExistThenCallRepository() {
-		String id = "123";
+		var id = 123L;
 		when(repository.existsById(id)).thenReturn(false);
-		var result = messageGateway.exists(id);
+		var result = messageGateway.exists(String.valueOf(id));
 		assertThat(result).isFalse();
 		verify(repository).existsById(id);
 	}
 
 	@Test
 	public void whenFindByExistentIdThenCallRepository() {
-		String id = "123";
+		var id = 123L;
 		when(repository.findById(id)).thenReturn(Optional.of(MessageEntity.builder().id(id).build()));
-		var result = messageGateway.find(id);
-		assertThat(result.get().getId()).isEqualTo(id);
+		var result = messageGateway.find(String.valueOf(id));
+		assertThat(result.get().getId()).isEqualTo("123");
 		verify(repository).findById(id);
 	}
 
 	@Test
 	public void whenFindByInvalidIdThenCallRepository() {
-		String id = "123";
+		var id = 123L;
 		when(repository.findById(id)).thenReturn(Optional.empty());
-		var result = messageGateway.find(id);
+		var result = messageGateway.find(String.valueOf(id));
 		assertThat(result.isEmpty()).isTrue();
 		verify(repository).findById(id);
 	}

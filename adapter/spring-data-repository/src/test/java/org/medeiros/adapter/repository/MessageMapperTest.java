@@ -203,7 +203,7 @@ class MessageMapperTest {
 			.build();
 		var dto = mapper.toEntity(message);
 		assertThat(dto).isNotNull();
-		assertThat(dto.getId()).isEqualTo("123");
+		assertThat(dto.getId()).isEqualTo(123L);
 	}
 
 	@Test

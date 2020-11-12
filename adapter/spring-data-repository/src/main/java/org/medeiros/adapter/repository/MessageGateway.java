@@ -30,12 +30,12 @@ public class MessageGateway implements MessageRepository {
 
 	@Override
 	public void delete(String id) {
-		repository.deleteById(id);
+		repository.deleteById(Long.valueOf(id));
 	}
 
 	@Override
 	public Optional<Message> find(String id) {
-		var message = repository.findById(id);
+		var message = repository.findById(Long.valueOf(id));
 		if (message.isPresent()) {
 			return Optional.of(messageMapper.toDomain(message.get()));
 		}
@@ -44,6 +44,6 @@ public class MessageGateway implements MessageRepository {
 
 	@Override
 	public boolean exists(String id) {
-		return repository.existsById(id);
+		return repository.existsById(Long.valueOf(id));
 	}
 }

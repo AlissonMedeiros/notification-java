@@ -46,7 +46,6 @@ class PushRequestNotificationTest {
 			.build());
 		assertThat(message).isNotNull()
 			.satisfies(m -> {
-				assertThat(m.getId()).hasSize(36);
 				assertThat(m.getChats()).hasSize(1)
 					.first()
 					.satisfies(c -> {

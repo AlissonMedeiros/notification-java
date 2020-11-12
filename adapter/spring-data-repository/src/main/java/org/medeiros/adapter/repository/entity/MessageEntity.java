@@ -19,7 +19,8 @@ public class MessageEntity {
 
 	@Id
 	@Column(name = "message_id")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	@Column(name = "message_schedule_date")
 	private LocalDateTime scheduleDate;
 	@Column(name = "message_body")

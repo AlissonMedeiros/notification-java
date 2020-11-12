@@ -8,9 +8,9 @@ services:
     ports:
       - 8080:8080
     environment:
-      - POSTGRES_URL=jdbc:postgresql://db:5432/notification
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=test123
+      POSTGRES_URL: jdbc:postgresql://db:5432/notification
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: test123
     deploy:
           resources:
             limits:

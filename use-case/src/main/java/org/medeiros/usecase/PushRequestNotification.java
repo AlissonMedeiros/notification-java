@@ -9,7 +9,6 @@ import org.medeiros.usecase.validator.MessageValidator;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 public class PushRequestNotification {
 
@@ -24,9 +23,7 @@ public class PushRequestNotification {
 
 	public Message push(Message message) throws NotificationException {
 		messageValidator.validate(message);
-		message.setId(UUID.randomUUID().toString());
 		message.setChats(List.of(Chat.builder()
-			.id(UUID.randomUUID().toString())
 			.date(LocalDateTime.now())
 			.status(Status.WAITING)
 			.build()));

@@ -17,8 +17,9 @@ import java.time.LocalDateTime;
 public class ChatEntity {
 
 	@Id
+	@GeneratedValue(generator = "")
 	@Column(name = "chat_id")
-	private String id;
+	private Long id;
 	@Column(name = "chat_status")
 	@Enumerated(EnumType.STRING)
 	private StatusEntity status;
