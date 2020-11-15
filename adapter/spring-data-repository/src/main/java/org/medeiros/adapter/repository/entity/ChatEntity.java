@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 public class ChatEntity {
 
 	@Id
-	@GeneratedValue(generator = "")
-	@Column(name = "chat_id")
+	@GeneratedValue
+	@Column(name = "id")
 	private Long id;
 	@Column(name = "chat_status")
 	@Enumerated(EnumType.STRING)
@@ -26,7 +26,7 @@ public class ChatEntity {
 	@Column(name = "chat_date")
 	private LocalDateTime date;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "message_id")
+	@JoinColumn(name = "message_id", referencedColumnName = "id")
 	private MessageEntity message;
 
 }

@@ -8,13 +8,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.5.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-
 	<properties>
 		<java.version>11</java.version>
 		<lombok.version>1.18.12</lombok.version>
@@ -23,6 +16,7 @@
 		<io-rest-assured.version>4.3.1</io-rest-assured.version>
 		<jacoco.line.coverage>0.99</jacoco.line.coverage>
 		<jacoco.branch.coverage>0.99</jacoco.branch.coverage>
+		<spring-boot.version>2.3.5.RELEASE</spring-boot.version>
 	</properties>
 
 	<dependencyManagement>

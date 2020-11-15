@@ -18,7 +18,7 @@ import java.util.List;
 public class MessageEntity {
 
 	@Id
-	@Column(name = "message_id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "message_schedule_date")
